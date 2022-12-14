@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mit.c301.nf4.mapper.MemberMapper">
+
+<resultMap type="mit.c301.nf4.domain.MemberVO" id="memberMap">
+<id property="id" column="id"/>
+<result property="id" column="id"/>
+<result property="pw" column="pw"/>
+<result property="user_name" column="user_name"/>
+<collection property="authList" resultMap="authMap">
+</collection>
+</resultMap>
+
+<resultMap type="mit.c301.nf4.domain.AuthVO" id="authMap">
+<result property="id" column="id"/>
+<result property="auth" column="auth"/>
+</resultMap>
+
+<select id="read" resultMap="memberMap">
+select mem.id,pw,user_name,enable,auth from tbltest mem LEFT OUTER JOIN auth auth on mem.id=auth.id where mem.id = #{id}
+</select>
+
+</mapper>
